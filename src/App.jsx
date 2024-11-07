@@ -16,7 +16,6 @@ function App() {
         <Route path="/campers" element={<BookingForm />} />
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element={<CamperPage />} />
-        {/* <Route path="/campers" element={<CatalogPage />} /> */}
       </Routes>
       ;
     </div>
