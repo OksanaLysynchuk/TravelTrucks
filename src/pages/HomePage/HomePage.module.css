@@ -1,0 +1,80 @@
+.container {
+  width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  width: 1440px;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url(/public/img/Bkg@1x.jpg),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(/public/img/Bkg@2x.jpg);
+}
+
+.title {
+  margin: 0px;
+  font-family: Inter;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #f7f7f7;
+}
+
+.text {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #f7f7f7;
+  margin: 0px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 60px;
+  color: #ffffff;
+  background-color: #e44848;
+  border-radius: 200px;
+}
+
+.textcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.main {
+  margin-left: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+/* ---------------------------------------------------------- */

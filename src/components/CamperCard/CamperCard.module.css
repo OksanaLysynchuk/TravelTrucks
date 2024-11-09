@@ -1,0 +1,31 @@
+.img {
+  width: 292px;
+  height: 320px;
+  border-radius: 10px;
+}
+
+.campercard {
+  width: 888px;
+  height: 368px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.favbtn {
+  width: 26px;
+  height: 24px;
+  color: #101828;
+}
+
+.favbtn:active {
+  color: #e44848;
+}
+
+.icon {
+  stroke: #101828;
+}
+
+.icon:active {
+  stroke: #e44848;
+}

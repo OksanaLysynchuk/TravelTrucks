@@ -1,0 +1,18 @@
+.catalog {
+  width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 86px 64px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}

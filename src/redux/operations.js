@@ -8,21 +8,21 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-// Fetch campers with optional filtering
-
-export const fetchCampers = async (filters = {}) => {
-  console.log("Fetching campers with filters:", filters); // логуємо фільтри
-
+// Fetch campers with optional filtering and pagination
+export const fetchCampers = async (filters = {}, page = 1) => {
+  const itemsPerPage = 4;
   const cleanFilters = Object.fromEntries(
     Object.entries(filters).filter(
-      ([, value]) => value !== "" && value !== false
+      ([, value]) => value !== "" && value !== false && value != null
     )
   );
 
-  const response = await api.get("/campers", { params: cleanFilters });
-  console.log("API response:", response); // Перевірте повну відповідь від API
+  // Додаємо пагінацію до запиту
+  const response = await api.get("/campers", {
+    params: { ...cleanFilters, page, limit: itemsPerPage },
+  });
 
-  return response.data; // повертаємо тільки data, якщо це масив кемперів
+  return response.data;
 };
 
 // Fetch camper details by ID

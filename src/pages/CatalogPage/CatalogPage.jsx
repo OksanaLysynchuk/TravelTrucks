@@ -1,99 +1,77 @@
-// src/pages/CatalogPage.jsx
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchCampersThunk } from "../../redux/campersSlice";
-import { CamperCard } from "../../components/CamperCard/CamperCard.jsx";
+import { Header } from "../../components/Header/Header.jsx";
+import { Filters } from "../../components/Filters/Filters.jsx";
+import { CampersList } from "../../components/CampersList/CampersList.jsx";
 import LoadingSpinner from "../../components/Loader/Loader.jsx";
+import css from "./CatalogPage.module.css";
 
 export const CatalogPage = () => {
   const dispatch = useDispatch();
-  const { items, status, error, page, totalItems } = useSelector(
+  const { items, status, error, totalItems } = useSelector(
     (state) => state.campers
   );
 
+  // Локальні стани для фільтрів та пагінації
   const [filters, setFilters] = useState({
     location: "",
     type: "",
     hasAC: false,
     hasKitchen: false,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   useEffect(() => {
-    dispatch(fetchCampersThunk({ filters, page })); // Завантажуємо кемпери з поточними фільтрами і номером сторінки
-  }, [dispatch, filters, page]);
+    // При запуску або зміні фільтрів, перший раз завантажуємо сторінку
+    dispatch(fetchCampersThunk({ filters, page: 1 }));
+  }, [dispatch, filters]);
 
-  const handleFilterChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
 
+  // const handleSearch = () => {
+  //   // Викликається, коли користувач натискає кнопку пошуку
+  //   dispatch(fetchCampersThunk({ filters, page: 1 }));
+  // };
+
   const loadMore = () => {
-    dispatch(fetchCampersThunk({ filters, page: page + 1 })); // Завантажуємо наступну сторінку
+    if (currentPage * itemsPerPage < totalItems) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      dispatch(fetchCampersThunk({ filters, page: currentPage + 1 }));
+    }
   };
 
-  // Логіка для визначення, чи є ще сторінки
-  const hasMoreItems = items.length < totalItems; // Якщо кількість завантажених кемперів менше за загальну кількість
+  const displayedItems = items.slice(0, currentPage * itemsPerPage);
+  const hasMoreItems = displayedItems.length < totalItems;
 
   if (status === "loading") return <LoadingSpinner />;
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
-    <div className="catalog">
-      <h2>Our Campers</h2>
-
-      {/* Filter Section */}
-      <div className="filters">
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={filters.location}
-          onChange={handleFilterChange}
-        />
-        <input
-          type="text"
-          name="type"
-          placeholder="Type"
-          value={filters.type}
-          onChange={handleFilterChange}
-        />
-        <label>
-          <input
-            type="checkbox"
-            name="hasAC"
-            checked={filters.hasAC}
-            onChange={handleFilterChange}
-          />
-          AC
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="hasKitchen"
-            checked={filters.hasKitchen}
-            onChange={handleFilterChange}
-          />
-          Kitchen
-        </label>
-      </div>
-
-      <div className="camper-list">
-        {items.length > 0 ? (
-          items.map((camper) => <CamperCard key={camper.id} camper={camper} />)
-        ) : (
-          <p>No campers available.</p>
+    <div className={css.catalog}>
+      <Header />
+      <div className={css.main}>
+        <div className={css.filters}>
+          <Filters filters={filters} onFilterChange={handleFilterChange} />
+          {/* <button onClick={handleSearch} className={css.searchbtn}>
+            Search
+          </button> */}
+        </div>
+        <CampersList items={displayedItems} />
+        {hasMoreItems && (
+          <button onClick={loadMore} className={css.loadmore}>
+            Load More
+          </button>
         )}
       </div>
-
-      {/* Load More Button */}
-      {hasMoreItems && (
-        <button onClick={loadMore} className="btn-load-more">
-          Load More
-        </button>
-      )}
     </div>
   );
 };

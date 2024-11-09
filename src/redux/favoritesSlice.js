@@ -1,24 +1,20 @@
-//src/redux/favoritesSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [];
 
 const favoritesSlice = createSlice({
   name: "favorites",
-  initialState: {
-    items: [],
-  },
+  initialState,
   reducers: {
-    addFavorite(state, action) {
-      const camper = action.payload;
-      if (!state.items.some((item) => item.id === camper.id)) {
-        state.items.push(camper);
-      }
+    addToFavorites: (state, action) => {
+      state.push(action.payload); // Додаємо кемпера в обране
     },
-    removeFavorite(state, action) {
-      const camperId = action.payload;
-      state.items = state.items.filter((item) => item.id !== camperId);
+    removeFromFavorites: (state, action) => {
+      return state.filter((camper) => camper.id !== action.payload); // Видаляємо кемпера з обраного
     },
   },
 });
 
-export const { addFavorite, removeFavorite } = favoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
+
 export default favoritesSlice.reducer;

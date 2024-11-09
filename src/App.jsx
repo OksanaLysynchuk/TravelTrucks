@@ -17,7 +17,6 @@ function App() {
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element={<CamperPage />} />
       </Routes>
-      ;
     </div>
   );
 }
