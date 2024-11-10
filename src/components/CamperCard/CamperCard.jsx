@@ -3,29 +3,33 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
   removeFromFavorites,
-} from "../../redux/favoritesSlice"; // Замість цього шляху імпортуйте свою логіку
+} from "../../redux/favoritesSlice";
 import css from "./CamperCard.module.css";
 
 export const CamperCard = ({ camper }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites); // Стан обраних кемперів
+  const favorites = useSelector((state) => state.favorites);
 
-  const isFavorite = favorites.some((fav) => fav.id === camper.id); // Перевірка, чи кемпер вже в обраному
+  const isFavorite = favorites.some((fav) => fav.id === camper.id);
 
   const handleShowMore = () => {
-    navigate(`/catalog/${camper.id}`); // Перенаправляємо на деталі кемпера
+    navigate(`/catalog/${camper.id}`);
+  };
+
+  const favIconStyle = {
+    isFavorite: { fill: "#E44848" },
+    notFavorite: { fill: "#101828" },
   };
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      dispatch(removeFromFavorites(camper.id)); // Видалити з обраного
+      dispatch(removeFromFavorites(camper.id));
     } else {
-      dispatch(addToFavorites(camper)); // Додати в обране
+      dispatch(addToFavorites(camper));
     }
   };
 
-  // Створення короткого опису для устаткування
   const equipmentList = Object.entries(camper)
     .filter(
       ([key, value]) =>
@@ -43,41 +47,74 @@ export const CamperCard = ({ camper }) => {
 
   return (
     <div className={css.campercard}>
-      <img
-        src={camper.gallery[0]?.thumb}
-        alt={camper.name}
-        className={css.img}
-      />
-      <h3>{camper.name}</h3>
-      <p>Rental Price: ${camper.price}</p>
-      <button onClick={toggleFavorite} className={css.favbtn}>
-        <svg width="26" height="24" className={css.icon}>
-          <use href="/public/sprite.svg#icon-heart"></use>
-        </svg>
-        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-      </button>
-      <p>Rating: {camper.rating} / 5</p>
-      <p>Location: {camper.location}</p>
-      <p>{camper.description.slice(0, 100)}...</p>{" "}
-      {/* Відображення зкороченого опису */}
-      <div className={css.camperequipment}>
-        <h4>Equipment:</h4>
-        <ul>
-          {equipmentList.length > 0 ? (
-            equipmentList.map((equipment, index) => (
-              <li key={index}>{equipment}</li>
-            ))
-          ) : (
-            <li>No equipment available</li>
-          )}
-        </ul>
+      <div className={css.card}>
+        <img
+          src={camper.gallery[0]?.thumb}
+          alt={camper.name}
+          className={css.img}
+        />
+        <div className={css.info}>
+          <div className={css.cardheader}>
+            <div className={css.cardtitle}>
+              <h3 className={css.campername}>{camper.name}</h3>
+              <div className={css.end}>
+                <p className={css.camperprice}> €{camper.price}</p>
+                <button onClick={toggleFavorite} className={css.favbtn}>
+                  <svg
+                    width="26"
+                    height="24"
+                    className={css.hearticon}
+                    style={
+                      isFavorite
+                        ? favIconStyle.isFavorite
+                        : favIconStyle.notFavorite
+                    }
+                  >
+                    <use href="/public/sprite.svg#icon-heart"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className={css.cardsubtitle}>
+            <p className={css.camperrating}>
+              {/* <svg
+              width="26"
+              height="24"
+              className={css.staricon}
+              // style={
+              //   isFavorite ? favIconStyle.isFavorite : favIconStyle.notFavorite
+              // }
+            >
+              <use href="/public/sprite.svg#icon-yellow-star"></use>
+            </svg>{" "} */}
+              {camper.rating}
+            </p>
+            <p className={css.camperlocation}>
+              {" "}
+              <svg width="20" height="20" className={css.locationicon}>
+                <use href="/public/sprite.svg#icon-map"></use>
+              </svg>{" "}
+              {camper.location}
+            </p>
+          </div>
+          <p>{camper.description.slice(0, 50)}...</p>{" "}
+          <div className={css.camperequipment}>
+            <ul className={css.equiplist}>
+              {equipmentList.length > 0 ? (
+                equipmentList.map((equipment, index) => (
+                  <li key={index}>{equipment}</li>
+                ))
+              ) : (
+                <li>No equipment available</li>
+              )}
+            </ul>
+          </div>
+          <button onClick={handleShowMore} className={css.showmore}>
+            Show More
+          </button>
+        </div>
       </div>
-      <div className={css.campertype}>
-        <h4>Type: {camper.form}</h4>
-      </div>
-      <button onClick={handleShowMore} className={css.showmore}>
-        Show More
-      </button>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-//src/pages/HomePage/HomePage.jsx
 import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header.jsx";
 import css from "./HomePage.module.css";

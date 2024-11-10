@@ -10,6 +10,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   padding: 86px 64px;
+  gap: 64px;
 }
 
 .filters {

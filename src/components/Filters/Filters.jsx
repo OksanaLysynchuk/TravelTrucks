@@ -9,7 +9,6 @@ export const Filters = ({ filters, onFilterChange }) => {
   const [camperTypes, setCamperTypes] = useState([]);
   const [equipments, setEquipments] = useState([]);
 
-  // Маппінг для іконок устаткування
   const equipmentIcons = {
     AC: "icon-ac",
     bathroom: "icon-shower",
@@ -22,11 +21,16 @@ export const Filters = ({ filters, onFilterChange }) => {
     water: "icon-water",
   };
 
-  // Маппінг для іконок типів кемперів
   const camperTypeIcons = {
-    type1: "icon-van",
-    type2: "icon-fully-integrated",
-    type3: "icon-alcove",
+    panelTruck: "icon-van",
+    fullyIntegrated: "icon-fully-integrated",
+    alcove: "icon-alcove",
+  };
+
+  const camperTypeName = {
+    panelTruck: "Van",
+    fullyIntegrated: "Fully Integrated",
+    alcove: "Alcove",
   };
 
   useEffect(() => {
@@ -79,7 +83,6 @@ export const Filters = ({ filters, onFilterChange }) => {
 
   return (
     <div className={css.filters}>
-      {/* Селект для локацій з іконкою мапи */}
       <div className={css.locationcontainer}>
         <label htmlFor="location" className={css.locationlabel}>
           Location
@@ -88,6 +91,7 @@ export const Filters = ({ filters, onFilterChange }) => {
           <svg width="20" height="20" className={css.locationicon}>
             <use href="/public/sprite.svg#icon-map"></use>
           </svg>
+
           <select
             name="location"
             id="location"
@@ -115,7 +119,6 @@ export const Filters = ({ filters, onFilterChange }) => {
 
       <p className={css.text}>Filters</p>
       <div className={css.filtercontainer}>
-        {/* Фільтр по устаткуванню з іконками */}
         <div className={css.equipmentcontainer}>
           <label className={css.equipmentlabel}>Vehicle equipment</label>
           <div className={css.equipment}>
@@ -137,8 +140,7 @@ export const Filters = ({ filters, onFilterChange }) => {
                   lineHeight: "24px",
                   letterSpacing: "-0.005em",
                   textAlign: "center",
-                  padding: "16px 40px",
-                  gap: "8px",
+
                   borderRadius: "12px",
                   border: filters[equipment]
                     ? "1px solid #E44848"
@@ -168,7 +170,6 @@ export const Filters = ({ filters, onFilterChange }) => {
           </div>
         </div>
 
-        {/* Фільтр по типу кемперів з іконками */}
         <div className={css.typecontainer}>
           <label className={css.typelabel}>Vehicle type</label>
           <div className={css.type}>
@@ -190,8 +191,7 @@ export const Filters = ({ filters, onFilterChange }) => {
                   lineHeight: "24px",
                   letterSpacing: "-0.005em",
                   textAlign: "center",
-                  padding: "16px 40px",
-                  gap: "8px",
+
                   borderRadius: "12px",
                   border: filters.form
                     ? "1px solid #E44848"
@@ -207,14 +207,14 @@ export const Filters = ({ filters, onFilterChange }) => {
                   className={css.typeinput}
                 />
                 <label htmlFor={type} className={css.typename}>
-                  <span className={css.typeicon}>
-                    <svg width="20" height="20" className={css.icon}>
+                  <span>
+                    <svg width="20" height="20" className={css.typeicon}>
                       <use
                         href={`/public/sprite.svg#${camperTypeIcons[type]}`}
                       ></use>
                     </svg>
                   </span>
-                  {type}
+                  {camperTypeName[type]}
                 </label>
               </div>
             ))}

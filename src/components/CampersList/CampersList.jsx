@@ -1,9 +1,9 @@
-// src/components/CampersList/CampersList.jsx
 import { CamperCard } from "../CamperCard/CamperCard.jsx";
+import css from "./CampersList.module.css";
 
 export const CampersList = ({ items }) => {
   return (
-    <div className="camper-list">
+    <div className={css.camperlist}>
       {items.length > 0 ? (
         items.map((camper) => <CamperCard key={camper.id} camper={camper} />)
       ) : (

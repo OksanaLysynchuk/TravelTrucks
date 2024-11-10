@@ -1,4 +1,3 @@
-// src/components/BookingForm.js
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { bookCamper } from "../../redux/campersSlice.js";

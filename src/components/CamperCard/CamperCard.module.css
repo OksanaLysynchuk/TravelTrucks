@@ -5,17 +5,23 @@
 }
 
 .campercard {
-  width: 888px;
-  height: 368px;
   border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
+  padding: 24px;
+  gap: 24px;
+  border-radius: 20px;
+  border: 1px solid #dadde1;
 }
 
 .favbtn {
-  width: 26px;
   height: 24px;
   color: #101828;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
 }
 
 .favbtn:active {
@@ -28,4 +34,122 @@
 
 .icon:active {
   stroke: #e44848;
+}
+
+.showmore {
+  padding: 16px 60px;
+  background-color: #e44848;
+  color: #ffffff;
+  outline: none;
+  border-radius: 200px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.showmore:hover {
+  background-color: #d84343;
+  outline: none;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.staricon {
+  fill: yellow;
+  stroke: yellow;
+  border: 1px solid black;
+}
+
+.cardtitle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.end {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+.cardsubtitle {
+  display: flex;
+  gap: 16px;
+}
+
+.cardheader {
+  display: flex;
+  flex-direction: column;
+}
+
+.equiplist {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  gap: 24px;
+  max-width: 100%;
+}
+
+.campername {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+  margin: 0px;
+}
+
+.camperprice {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+  margin: 0px;
+}
+
+.camperrating {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+}
+
+.camperlocation {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
 }

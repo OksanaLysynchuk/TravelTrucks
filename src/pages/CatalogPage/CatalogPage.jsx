@@ -13,7 +13,6 @@ export const CatalogPage = () => {
     (state) => state.campers
   );
 
-  // Локальні стани для фільтрів та пагінації
   const [filters, setFilters] = useState({
     location: "",
     type: "",
@@ -24,7 +23,6 @@ export const CatalogPage = () => {
   const itemsPerPage = 4;
 
   useEffect(() => {
-    // При запуску або зміні фільтрів, перший раз завантажуємо сторінку
     dispatch(fetchCampersThunk({ filters, page: 1 }));
   }, [dispatch, filters]);
 
@@ -35,11 +33,6 @@ export const CatalogPage = () => {
       [name]: value,
     }));
   };
-
-  // const handleSearch = () => {
-  //   // Викликається, коли користувач натискає кнопку пошуку
-  //   dispatch(fetchCampersThunk({ filters, page: 1 }));
-  // };
 
   const loadMore = () => {
     if (currentPage * itemsPerPage < totalItems) {
@@ -61,9 +54,6 @@ export const CatalogPage = () => {
       <div className={css.main}>
         <div className={css.filters}>
           <Filters filters={filters} onFilterChange={handleFilterChange} />
-          {/* <button onClick={handleSearch} className={css.searchbtn}>
-            Search
-          </button> */}
         </div>
         <CampersList items={displayedItems} />
         {hasMoreItems && (

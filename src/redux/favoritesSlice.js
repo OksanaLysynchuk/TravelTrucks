@@ -7,10 +7,10 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addToFavorites: (state, action) => {
-      state.push(action.payload); // Додаємо кемпера в обране
+      state.push(action.payload);
     },
     removeFromFavorites: (state, action) => {
-      return state.filter((camper) => camper.id !== action.payload); // Видаляємо кемпера з обраного
+      return state.filter((camper) => camper.id !== action.payload);
     },
   },
 });

@@ -1,4 +1,3 @@
-//src/components/Header/Header.jsx
 import { NavLink } from "react-router-dom";
 import css from "./Header.module.css";
 

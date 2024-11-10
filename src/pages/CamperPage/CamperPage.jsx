@@ -1,13 +1,12 @@
-// src/pages/CamperPage.jsx
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCamperByIdThunk } from "../../redux/campersSlice"; // імпортуємо екшн для завантаження даних кемпера
+import { fetchCamperByIdThunk } from "../../redux/campersSlice";
 import { useParams } from "react-router-dom";
 
 import LoadingSpinner from "../../components/Loader/Loader.jsx";
 
 export const CamperPage = () => {
-  const { camperId } = useParams(); // Отримуємо ID кемпера з параметрів URL
+  const { camperId } = useParams();
   const dispatch = useDispatch();
   const { camperDetails, status, error } = useSelector(
     (state) => state.campers
@@ -15,7 +14,7 @@ export const CamperPage = () => {
 
   useEffect(() => {
     if (camperId) {
-      dispatch(fetchCamperByIdThunk(camperId)); // Перевіряємо, чи є camperId перед тим, як робити запит
+      dispatch(fetchCamperByIdThunk(camperId));
     }
   }, [dispatch, camperId]);
 
@@ -28,7 +27,6 @@ export const CamperPage = () => {
       <img src={camperDetails?.image} alt={camperDetails?.name} />
       <p>{camperDetails?.description}</p>
       <p>Price: ${camperDetails?.price}</p>
-      {/* Інші деталі кемпера */}
     </div>
   );
 };

@@ -1,30 +1,25 @@
-// redux/campersSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchCampers, fetchCamperDetails } from "./operations";
 
-// Create async thunk for fetching campers
-// src/redux/campersSlice.js
 export const fetchCampersThunk = createAsyncThunk(
   "campers/fetchCampers",
   async ({ filters, page }) => {
     const response = await fetchCampers(filters, page);
     return {
       items: response.items,
-      totalItems: response.totalItems, // Передаємо totalItems з відповіді
+      totalItems: response.totalItems,
     };
   }
 );
 
-// Create async thunk for fetching camper details by ID
 export const fetchCamperByIdThunk = createAsyncThunk(
   "campers/fetchCamperById",
   async (id) => {
-    const response = await fetchCamperDetails(id); // Викликаємо функцію fetchCamperDetails з API
+    const response = await fetchCamperDetails(id);
     return response;
   }
 );
 
-// src/redux/campersSlice.js
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
@@ -34,17 +29,15 @@ const campersSlice = createSlice({
     status: "idle",
     error: null,
     page: 1,
-    totalItems: 0, // Додаємо totalItems
+    totalItems: 0,
   },
-  reducers: {
-    // інші редюсери
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampersThunk.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.items = action.payload.items;
-        state.totalItems = action.payload.totalItems; // Зберігаємо загальну кількість
+        state.totalItems = action.payload.totalItems;
       })
       .addCase(fetchCampersThunk.rejected, (state, action) => {
         state.status = "failed";
