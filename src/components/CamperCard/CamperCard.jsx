@@ -11,6 +11,18 @@ export const CamperCard = ({ camper }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
 
+  const equipmentIcons = {
+    AC: "icon-ac",
+    bathroom: "icon-shower",
+    kitchen: "icon-cup",
+    TV: "icon-tv",
+    radio: "icon-radio",
+    refrigerator: "icon-fridge",
+    microwave: "icon-microwave",
+    gas: "icon-gas",
+    water: "icon-water",
+  };
+
   const isFavorite = favorites.some((fav) => fav.id === camper.id);
 
   const handleShowMore = () => {
@@ -75,35 +87,34 @@ export const CamperCard = ({ camper }) => {
                 </button>
               </div>
             </div>
+            <div className={css.cardsubtitle}>
+              <p className={css.camperrating}>{camper.rating}</p>
+              <p className={css.camperlocation}>
+                {" "}
+                <svg width="16" height="16" className={css.locationicon}>
+                  <use href="/public/sprite.svg#icon-map"></use>
+                </svg>{" "}
+                {camper.location}
+              </p>
+            </div>
           </div>
-          <div className={css.cardsubtitle}>
-            <p className={css.camperrating}>
-              {/* <svg
-              width="26"
-              height="24"
-              className={css.staricon}
-              // style={
-              //   isFavorite ? favIconStyle.isFavorite : favIconStyle.notFavorite
-              // }
-            >
-              <use href="/public/sprite.svg#icon-yellow-star"></use>
-            </svg>{" "} */}
-              {camper.rating}
-            </p>
-            <p className={css.camperlocation}>
-              {" "}
-              <svg width="20" height="20" className={css.locationicon}>
-                <use href="/public/sprite.svg#icon-map"></use>
-              </svg>{" "}
-              {camper.location}
-            </p>
-          </div>
-          <p>{camper.description.slice(0, 50)}...</p>{" "}
+          <p className={css.camperdiscription}>
+            {camper.description.slice(0, 50)}...
+          </p>{" "}
           <div className={css.camperequipment}>
             <ul className={css.equiplist}>
               {equipmentList.length > 0 ? (
                 equipmentList.map((equipment, index) => (
-                  <li key={index}>{equipment}</li>
+                  <li key={index} className={css.equipitem}>
+                    <span className={css.equipmenticon}>
+                      <svg width="20" height="20" className={css.icon}>
+                        <use
+                          href={`/public/sprite.svg#${equipmentIcons[equipment]}`}
+                        ></use>
+                      </svg>
+                    </span>
+                    {equipment}
+                  </li>
                 ))
               ) : (
                 <li>No equipment available</li>

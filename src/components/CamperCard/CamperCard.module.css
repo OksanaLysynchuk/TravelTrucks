@@ -1,7 +1,10 @@
 .img {
   width: 292px;
-  height: 320px;
+  /* height: 320px; */
+  height: auto;
   border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .campercard {
@@ -15,7 +18,7 @@
 }
 
 .favbtn {
-  height: 24px;
+  height: 32px;
   color: #101828;
   margin: 0px;
   display: flex;
@@ -26,10 +29,6 @@
 
 .favbtn:active {
   color: #e44848;
-}
-
-.icon {
-  stroke: #101828;
 }
 
 .icon:active {
@@ -61,6 +60,7 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
+  gap: 24px;
 }
 
 .staricon {
@@ -87,11 +87,14 @@
 .cardsubtitle {
   display: flex;
   gap: 16px;
+  align-items: center;
 }
 
 .cardheader {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 .equiplist {
@@ -101,6 +104,23 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 8px;
+}
+
+.equipitem {
+  display: flex;
+  padding: 12px 18px;
+  gap: 8px;
+  border-radius: 100px;
+  background-color: #f2f4f7;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  text-transform: capitalize;
 }
 .card {
   display: flex;
@@ -141,6 +161,7 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #101828;
+  margin: 0px;
 }
 
 .camperlocation {
@@ -152,4 +173,25 @@
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
   color: #101828;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.camperdiscription {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #475467;
+  margin: 0px;
+}
+
+.equipmenticon {
+  display: flex;
+  align-self: center;
 }
